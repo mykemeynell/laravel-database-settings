@@ -56,6 +56,10 @@ class LaravelDatabaseSettingsProvider extends ServiceProvider
     public function register(): void
     {
         $this->registerAliases();
+
+        $this->registerEntities();
+        $this->registerRepositories();
+        $this->registerServices();
     }
 
     /**
