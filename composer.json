@@ -17,6 +17,9 @@
     "autoload": {
         "psr-4": {
             "LaravelDatabaseSettings\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     }
 }
