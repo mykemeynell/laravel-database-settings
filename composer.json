@@ -1,0 +1,22 @@
+{
+    "name": "mykemeynell/laravel-database-settings",
+    "description": "Store settings in the database for retrieval in your Laravel application",
+    "keywords": ["laravel", "database", "settings", "config"],
+    "type": "library",
+    "require": {
+        "mykemeynell/archlayer": "^1.0",
+        "mykemeynell/laravel-alias-service": "^1.0",
+        "mykemeynell/laravel-provides-service": "^1.0"
+    },
+    "require-dev": {
+        "nesbot/carbon": "^2.19",
+        "laravel/framework": "^5.8",
+        "symfony/http-foundation": "^4.3",
+        "illuminate/support": "^5.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelDatabaseSettings\\": "src/"
+        }
+    }
+}
