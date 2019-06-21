@@ -22,6 +22,13 @@ class CreateApplicationSettingsTable extends Migration
             $table->string('key')->primary();
             $table->text('value')->nullable();
 
+            // A human friendly version of the key. Used to describe what the setting value
+            // is for.
+            $table->string('name')->nullable();
+
+            // Longer description of the setting key, human readable.
+            $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }
