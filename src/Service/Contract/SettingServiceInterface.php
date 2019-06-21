@@ -3,6 +3,7 @@
 namespace LaravelDatabaseSettings\Service\Contract;
 
 use ArchLayer\Service\Contract\ServiceInterface;
+use Illuminate\Support\Collection;
 use LaravelDatabaseSettings\Entity\Contract\SettingEntityInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
@@ -61,4 +62,12 @@ interface SettingServiceInterface extends ServiceInterface
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function get(string $key, $default = null);
+
+    /**
+     * Flush and reload the cache.
+     *
+     * @return Collection
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function flush(): Collection;
 }

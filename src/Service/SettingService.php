@@ -4,6 +4,7 @@ namespace LaravelDatabaseSettings\Service;
 
 use ArchLayer\Service\Service;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use LaravelDatabaseSettings\Entity\Contract\SettingEntityInterface;
 use LaravelDatabaseSettings\Repository\Contract\SettingRepositoryInterface;
 use LaravelDatabaseSettings\Service\Contract\SettingServiceInterface;
@@ -93,13 +94,13 @@ class SettingService extends Service implements SettingServiceInterface
      */
     public function fetch($fresh = false)
     {
-        if($fresh) {
-            cache()->rememberForever($this->cache_key, function() {
+        if ($fresh || ! cache()->has($this->cache_key)) {
+            cache()->rememberForever($this->cache_key, function () {
                 return $this->getRepository()->builder()->get();
             });
         }
 
-        return cache()->pull($this->cache_key, $this->fetch(true));
+        return cache()->pull($this->cache_key);
     }
 
     /**
@@ -113,6 +114,21 @@ class SettingService extends Service implements SettingServiceInterface
      */
     public function get(string $key, $default = null)
     {
-        return $this->fetch()->get($key, $default);
+        $query = $this->fetch()->where('key', $key);
+
+        return ! $query->isEmpty()
+            ? $query->first()->getValue()
+            : $default;
+    }
+
+    /**
+     * Flush and reload the cache.
+     *
+     * @return Collection
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function flush(): Collection
+    {
+        return $this->fetch(true);
     }
 }
