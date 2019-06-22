@@ -64,6 +64,16 @@ interface SettingServiceInterface extends ServiceInterface
     public function get(string $key, $default = null);
 
     /**
+     * Set the value of a setting in the database.
+     *
+     * @param string $Key
+     * @param        $value
+     *
+     * @return bool
+     */
+    public function set(string $Key, $value): bool;
+
+    /**
      * Flush and reload the cache.
      *
      * @return Collection

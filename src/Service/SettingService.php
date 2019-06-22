@@ -122,6 +122,33 @@ class SettingService extends Service implements SettingServiceInterface
     }
 
     /**
+     * Set the value of a setting in the database.
+     *
+     * @param string $key
+     * @param        $value
+     *
+     * @param null   $name
+     * @param null   $description
+     *
+     * @return bool
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function set(string $key, $value, $name = null, $description = null): bool
+    {
+        try {
+            $setting = $this->getRepository()->builder()->firstOrNew(compact('key'));
+            $setting->fill(compact('value', 'name', 'description'));
+            $setting->save();
+
+            $this->flush();
+
+            return true;
+        } catch(\Exception $exception) {
+            return false;
+        }
+    }
+
+    /**
      * Flush and reload the cache.
      *
      * @return Collection
