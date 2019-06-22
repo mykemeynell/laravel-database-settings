@@ -61,6 +61,24 @@ class SettingEntity extends Model implements SettingEntityInterface
             return $json;
         }
 
+        switch (strtolower($this->value)) {
+            case 'true' :
+            case '(true)' :
+                return true;
+
+            case 'false' :
+            case '(false)' :
+                return false;
+
+            case 'empty' :
+            case '(empty)' :
+                return '';
+
+            case 'null' :
+            case '(null)' :
+                return null;
+        }
+
         return $this->value;
     }
 
