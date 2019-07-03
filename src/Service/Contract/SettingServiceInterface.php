@@ -53,6 +53,24 @@ interface SettingServiceInterface extends ServiceInterface
     public function fetch($fresh = false);
 
     /**
+     * Attempt to find a setting entity using its key.
+     *
+     * @param $key
+     *
+     * @return \LaravelDatabaseSettings\Entity\Contract\SettingEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function getEntityUsingKey($key): ?SettingEntityInterface;
+
+    /**
+     * Attempt to find a setting entity using its ID.
+     *
+     * @param $id
+     *
+     * @return \LaravelDatabaseSettings\Entity\Contract\SettingEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function getEntityUsingId($id): ?SettingEntityInterface;
+
+    /**
      * Get a key value from the application settings.
      *
      * @param string $key

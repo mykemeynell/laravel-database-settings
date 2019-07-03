@@ -104,6 +104,30 @@ class SettingService extends Service implements SettingServiceInterface
     }
 
     /**
+     * Attempt to find a setting entity using its key.
+     *
+     * @param $key
+     *
+     * @return \LaravelDatabaseSettings\Entity\Contract\SettingEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function getEntityUsingKey($key): ?SettingEntityInterface
+    {
+        return $this->getRepository()->builder()->where('key', $key)->first();
+    }
+
+    /**
+     * Attempt to find a setting entity using its ID.
+     *
+     * @param $id
+     *
+     * @return \LaravelDatabaseSettings\Entity\Contract\SettingEntityInterface|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function getEntityUsingId($id): ?SettingEntityInterface
+    {
+        return $this->getRepository()->findUsingId($id);
+    }
+
+    /**
      * Get a key value from the application settings.
      *
      * @param string $key
