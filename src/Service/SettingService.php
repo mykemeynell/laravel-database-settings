@@ -161,7 +161,18 @@ class SettingService extends Service implements SettingServiceInterface
     {
         try {
             $setting = $this->getRepository()->builder()->firstOrNew(compact('key'));
-            $setting->fill(compact('value', 'name', 'description'));
+
+            $attributes = compact('name');
+
+            if(! empty($name)) {
+                $attributes['name'] = $name;
+            }
+
+            if(! empty($description)) {
+                $attributes['description'] = $description;
+            }
+
+            $setting->fill($attributes);
             $setting->save();
 
             $this->flush();
